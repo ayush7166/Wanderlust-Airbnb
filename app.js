@@ -88,7 +88,7 @@ main()
 
 
 app.get("/",(req,res)=>{
-    res.send("root");
+   throw ExpressError(404,"Page Not Founf!!");
 })
 
 app.use("/listings",listingrouter);
