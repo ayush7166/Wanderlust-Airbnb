@@ -1,0 +1,2 @@
+npm install express express@4 mongoose method-override ejs ejs-mate cookie-parser express-session connect-flash passport passport-local joi nodemon cloudinary multer-storage-cloudinary-v2
+npm install multer multer-storage-cloudinary cloudinary --legacy-peer-deps

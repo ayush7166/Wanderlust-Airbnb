@@ -1,0 +1,170 @@
+<% layout("/layouts/boilerplate.ejs") %>
+
+<style>
+    #filters{
+        display: flex;
+        flex-wrap: wrap;
+        padding-top:1rem ;
+        margin-bottom:1rem;
+    }
+    .filters{
+        width:800px;
+        overflow: hidden;  /* viewport */
+        position: relative;
+    }
+    .filters-track{
+        display: flex;
+        gap: 1.2rem;
+        margin-left: 0.1rem;
+        transition: transform 0.4s ease;
+    }
+    .filter{
+        flex: 0 0 auto;
+        text-align: center;
+        opacity: 0.6;
+    }
+    .filter:hover{
+        opacity: 1;
+    }
+    .tax-toggle{
+        border: 1px solid black;
+        border-radius: 1rem;
+        height: 3.5rem;
+        padding: 1rem;
+        margin-left: 5rem;
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+        opacity: 0.6;
+    }
+    .tax-toggle:hover{
+        opacity: 1;
+    }
+    .tax-info{
+        display: none;
+    }
+    .sliderbutton-left button,
+    .sliderbutton-right button{
+        background-color:#e9e9e9cc;
+        height: 3rem;
+        border: 2px solid #e9e9e9cc;
+        border-radius: 50%;
+        width: 3rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        cursor: pointer;
+        z-index: 1000;
+    }
+    .sliderbutton:hover {
+        background-color: #d1d1d1;
+    }
+    .sliderbutton-left{
+        margin-right: 1rem;
+    }
+    .sliderbutton-right{
+        margin-left: 1rem;
+    }
+</style>
+
+<body>
+    <div id="filters">
+        <div class="sliderbutton-left">
+           <button><i class="fa-solid fa-arrow-left fa-lg"></i></button>
+        </div>
+        <div class="filters">
+            <div class="filters-track ">
+                <div class="filter"><i class="fa-solid fa-fire fa-lg"></i><p>Trending</p></div>
+                <div class="filter"><i class="fa-solid fa-bed fa-lg"></i><p>Rooms</p></div>
+                <div class="filter"><i class="fa-solid fa-mountain-city fa-lg"></i><p>Iconic cities</p></div>
+                <div class="filter"><i class="fa-solid fa-fire fa-lg"></i><p>Trending</p></div>
+                <div class="filter"><i class="fa-solid fa-bed fa-lg"></i><p>Rooms</p></div>
+                <div class="filter"><i class="fa-solid fa-mountain-city fa-lg"></i><p>Iconic cities</p></div>
+                <div class="filter"><i class="fa-solid fa-fire fa-lg"></i><p>Trending</p></div>
+                <div class="filter"><i class="fa-solid fa-bed fa-lg"></i><p>Rooms</p></div>
+                <div class="filter"><i class="fa-solid fa-mountain-city fa-lg"></i><p>Iconic cities</p></div>
+                <div class="filter"><i class="fa-solid fa-mountain fa-lg"></i><p>Mountains</p></div>
+                <div class="filter"><i class="fa-brands fa-fort-awesome fa-lg"></i><p>Castles</p></div>
+                <div class="filter"><i class="fa-solid fa-person-swimming fa-lg"></i><p>Amazing Pools</p></div>
+                <div class="filter"><i class="fa-solid fa-campground fa-lg"></i><p>Camping</p></div>
+                <div class="filter"><i class="fa-solid fa-cow fa-lg"></i><p>Farms</p></div>
+               
+            </div>
+        </div>
+        <div class="sliderbutton-right">
+            <button><i class="fa-solid fa-arrow-right fa-lg"></i></button>
+        </div>
+        <div class="tax-toggle">
+            <div class="form-check-reverse form-switch">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault"><b>Display Total after taxes</b></label>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1">
+            <%for(listing of allListings){%>
+            <a href="/listings/<%=listing._id%>" class="listing-link">
+                <div class="card col">
+                    <img 
+                        src="<%=listing.image%>" 
+                        class="card-img-top" 
+                        style="height: 20rem;" 
+                        alt="listing_image" />
+                    <div class="card-img-overlay"></div>
+                    <div class="card-body">
+                        <p class="card-text">
+                         <%=listing.title%> <br>
+                         &#8377; <%=listing.price.toLocaleString("en-IN")%>/night
+                        <i class="tax-info"> + 18% GST</i>
+                        </p>
+                    </div>
+                </div>
+            </a>
+            <%}%> 
+        </div> 
+    </div>
+
+   <script>
+        const leftBtn = document.querySelector(".sliderbutton-left button");
+        const rightBtn = document.querySelector(".sliderbutton-right button");
+        const sliderTrack = document.querySelector(".filters-track");
+        const slider = document.querySelector(".filters");
+
+        let currentX = 0; 
+        const step = 200; 
+
+        rightBtn.addEventListener("click", () => {
+            const maxTranslate = -(sliderTrack.scrollWidth - slider.offsetWidth);
+            if (currentX - step >= maxTranslate) {
+                currentX -= step;
+            } else {
+                currentX = maxTranslate;
+            }
+            sliderTrack.style.transform = `translateX(${currentX}px)`;
+        });
+
+        leftBtn.addEventListener("click", () => {
+            if (currentX + step <= 0) {
+                currentX += step;
+            } else {
+                currentX = 0;
+            }
+            sliderTrack.style.transform = `translateX(${currentX}px)`;
+        });
+
+        let taxswitch=document.getElementById("flexSwitchCheckDefault")
+        taxswitch.addEventListener("click",()=>{
+            let taxinfo= document.querySelectorAll(".tax-info");
+            for(info of taxinfo){
+                if(info.style.display!="inline"){
+                    info.style.display="inline";
+                }else{
+                    info.style.display="none";
+                }
+            }
+        })
+   </script>
+</body>

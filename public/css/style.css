@@ -1,0 +1,149 @@
+body{
+    margin: 0px !important;
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;  /* body always at least 100% viewport height */
+
+}
+.container{
+    flex: 1;
+}
+
+.f-info{
+    background-color: #F8F9FA;
+    height: 150px;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    justify-content: space-around;
+    position:relative !important ;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+
+}
+.f-info-socials {
+    font-size: 1.6rem;
+    color: black;
+    
+}
+.f-info-socials a i{
+    color: rgb(29, 29, 29);
+    margin-left: 9px;
+}
+
+.f-info-links a{
+    text-decoration: none;
+    color: black;
+    font-size:1.2rem;
+}
+.card {
+    border: none !important;
+    margin-bottom: 2rem;
+}
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+
+}
+.card-body{
+    padding: 5px !important;
+}
+.card-text p{
+    font-weight:400 !important;
+}
+.listing-link{
+    text-decoration: none;
+}
+
+/* card effects */
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+
+.show-img {
+  height: 350px;       
+  object-fit: cover;   
+  width: 100%;          
+  border-radius: 10px;  /
+}
+.alert{
+    display: flex;
+    justify-content: space-between;
+}
+.d-flex{
+    margin-left: 200px;
+}
+/* navbar */
+.navbar {
+    display: flex;
+    position: sticky !important;  
+    top: 0;           
+    z-index: 1000;     
+    height: 80px;
+}
+
+
+.navbar-nav {
+    display: flex;
+    width: 350px; /* shrink to fit content */
+}
+
+
+.nav-item{
+    position: relative !important;
+    right: 100px !important;
+}
+.nav-item.dropdown:hover .dropdown-menu,
+.nav-item.dropdown .dropdown-menu:hover {
+    display: block;
+    opacity: 1;
+}
+
+.dropdown-menu {
+    transform: translateX(-65px) translateY(5px);
+}
+.dropdown-menu::before {
+    content: ""; /* required for pseudo-element */
+    position: absolute;
+    top: -6px;           /* position above menu */
+    left: 75px;         /* adjust to align with icon */
+    border-width: 6px;   /* size of the triangle */
+    border-style: solid;
+    border-color: transparent transparent #000000 transparent;
+}
+
+.dropdown-toggle::after {
+    display: none !important;
+}
+.container-fluid{
+    display: flex;
+}
+/* Make the navbar container a flex container */
+.navbar .container-fluid {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* brand left, dropdown right */
+    position: relative;
+}
+
+/* Collapse and nav links stay on left if needed */
+.collapse.navbar-collapse {
+    display: flex;
+    flex: 1;
+}
+
+/* Center the search bar */
+.search {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-72%);
+    display: flex;
+    align-items: center;
+}
