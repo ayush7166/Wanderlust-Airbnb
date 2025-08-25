@@ -88,7 +88,7 @@ main()
 
 
 app.get("/",(req,res)=>{
-   throw ExpressError(404,"Page Not Founf!!");
+    res.redirect("/listings");
 })
 
 app.use("/listings",listingrouter);
@@ -99,6 +99,7 @@ app.use("/user",userrouter);
 
 app.all("*",(req,res,next)=>{
     throw new ExpressError(404,"Page Not Found!!");
+
 })
 app.use((err, req, res, next) => {
     const { status = 500, message = "Something went wrong!" } = err;
