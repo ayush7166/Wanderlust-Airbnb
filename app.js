@@ -27,10 +27,9 @@ const dburl=process.env.ATLASDB_URL;
 const store=MongoStore.create({
     mongoUrl:dburl,
     crypto:{
-        secret:process.env.SECRET,
         secret: process.env.SECRET,
-        touchafter :24*3600,
-    }
+    },
+    touchafter :24*3600,
 })
 store.on("error",()=>{
     console.log("error in mongo session store",err);
@@ -89,12 +88,8 @@ main()
 
 
 app.get("/",(req,res)=>{
-
-    res.send("root");
-
     req.flash("success","Welcone viewer site devlope by bansal !!");
     res.redirect("/listings");
-
 })
 
 app.use("/listings",listingrouter);
@@ -108,10 +103,12 @@ app.all("*",(req,res,next)=>{
 
 })
 app.use((err, req, res, next) => {
+    if (res.headersSent) {
+        return next(err);
+    }
     const { status = 500, message = "Something went wrong!" } = err;
-    res.render("error.ejs",{status,message});
+    res.status(status).render("error.ejs", { status, message });
 });
-
 
 app.listen(8080,()=>{
     console.log("listening!!");
