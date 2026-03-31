@@ -27,11 +27,8 @@ const dburl=process.env.ATLASDB_URL;
 const store=MongoStore.create({
     mongoUrl:dburl,
     crypto:{
-<<<<<<< HEAD
         secret:process.env.SECRET,
-=======
         secret: process.env.SECRET,
->>>>>>> 4ee5ea57237774efbc251b794e72f99ae6f12045
         touchafter :24*3600,
     }
 })
@@ -92,12 +89,12 @@ main()
 
 
 app.get("/",(req,res)=>{
-<<<<<<< HEAD
+
     res.send("root");
-=======
+
     req.flash("success","Welcone viewer site devlope by bansal !!");
     res.redirect("/listings");
->>>>>>> 4ee5ea57237774efbc251b794e72f99ae6f12045
+
 })
 
 app.use("/listings",listingrouter);
@@ -108,10 +105,7 @@ app.use("/user",userrouter);
 
 app.all("*",(req,res,next)=>{
     throw new ExpressError(404,"Page Not Found!!");
-<<<<<<< HEAD
-=======
 
->>>>>>> 4ee5ea57237774efbc251b794e72f99ae6f12045
 })
 app.use((err, req, res, next) => {
     const { status = 500, message = "Something went wrong!" } = err;
