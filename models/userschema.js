@@ -1,18 +1,18 @@
 const mongoose = require("mongoose");
-const passportlocalmongoose = require("passport-local-mongoose");
+const passportLocalMongoose = require("passport-local-mongoose");
 
+// fix for both local + render
+const plugin = passportLocalMongoose.default || passportLocalMongoose;
 
-
-
-const userschema=new mongoose.Schema({
-    email:{
-        type:String,
-        required:true,
-        unique:true
+const userSchema = new mongoose.Schema({
+    email: {
+        type: String,
+        required: true,
+        unique: true
     }
 });
 
-userschema.plugin(passportlocalmongoose);
+// apply plugin
+userSchema.plugin(plugin);
 
-
-module.exports=new mongoose.model("User",userschema);
+module.exports = mongoose.model("User", userSchema);
