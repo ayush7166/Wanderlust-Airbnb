@@ -1,0 +1,17 @@
+<<<<<<< HEAD
+# Ignore node_modules
+node_modules/
+.env
+.env.*
+# Ignore all JSON files
+*.json
+
+node_modules/
+
+# Ignore all JSON files
+*.json
+=======
+node_modules/
+.env
+>>>>>>> 4ee5ea57237774efbc251b794e72f99ae6f12045
+
